@@ -40,7 +40,7 @@ def _custom_year_pad(data, n_years):
     return np.concatenate((start_year, data, end_year)), pad_width
     
 
-def detrend_seasonal(full_data: npt.NDArray):
+def seasonal_detrend(full_data: npt.NDArray):
     means = np.mean(full_data, axis=(1, 2))
     long_term_mean = np.mean(means)
     mean_anom = means-long_term_mean
@@ -71,7 +71,7 @@ def detrend_seasonal(full_data: npt.NDArray):
     
     return (full_data_detrended, diffs)
 
-def inv_detrend_seasonal(full_data_detrended: npt.NDArray, diffs: npt.NDArray):
+def inv_seasonal_detrend(full_data_detrended: npt.NDArray, diffs: npt.NDArray):
     trendshape = (-1,) + (1,) * (len(full_data_detrended.shape)-1)
     inv_detrend = full_data_detrended + diffs.reshape(trendshape)
     

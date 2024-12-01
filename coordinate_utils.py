@@ -31,4 +31,13 @@ def ts_to_dt(timestamp):
         pass
     
     return datetime.strptime(timestamp, '%Y-%m-%d')
+
+def sphere_surface_area(lat, lon, resolution):
+    lon1 = lon - resolution/2
+    lon2 = lon + resolution/2
+    lat1 = lat - resolution/2
+    lat2 = lat + resolution/2
     
+    a = 6.378*10**6
+    
+    return (np.pi * (a**2)) * (np.sin(np.deg2rad(lat2)) - np.sin(np.deg2rad(lat1))) * ((lon2-lon1)/180)
